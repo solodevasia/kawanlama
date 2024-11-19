@@ -9,7 +9,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "tailwind-init": "npx tailwindcss init",
-    "add-module": "nuxi module add"
+    "add-module": "nuxi module add",
+    "start": "node ./output/server/index.mjs"
   },
   "dependencies": {
     "moment": "^2.30.1",
