@@ -1,0 +1,22 @@
+{
+  "name": "kawanlama",
+  "description": "Solo Development Revolutionary Company",
+  "scripts": {},
+  "engines": {
+    "node": "v22.11.0",
+    "npm": "v10.9.0",
+    "pnpm": "v9.13.2"
+  },
+  "author": {
+    "name": "Kenedy Nopriansyah",
+    "email": "kenedinovriansyah@gmail.com",
+    "url": "https://www.linkedin.com/in/kenedy-nopriansyah-b5864a200/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solodevasia/kawanlama.git",
+    "directory": "src"
+  },
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@9.13.2+sha512.88c9c3864450350e65a33587ab801acf946d7c814ed1134da4a924f6df5a2120fd36b46aab68f7cd1d413149112d53c7db3a4136624cfd00ff1846a0c6cef48a"
+}
