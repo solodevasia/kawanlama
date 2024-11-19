@@ -1,5 +1,11 @@
 <template>
   <div class="flex items-center justify-center w-full h-[100vh]">
+    <div
+      v-if="data.failed"
+      class="absolute top-0 left-0 w-full p-2 bg-red-700 text-center text-white"
+    >
+      Username or password incorrect
+    </div>
     <div>
       <div class="mb-4">
         <label for="username" class="text-[14px] text-gray-500 font-semibold"
@@ -59,7 +65,7 @@
 import { defineComponent, reactive } from "vue";
 export default defineComponent({
   setup() {
-    const data = reactive({ username: "", password: "" });
+    const data = reactive({ username: "", password: "", failed: false });
 
     function onNavigate() {
       navigateTo("/register");
@@ -71,7 +77,10 @@ export default defineComponent({
     }
 
     function onSubmit() {
-      navigateTo("/dashboard");
+      if (data.username === "admin" && data.password === "admin") {
+        data.failed = false;
+        navigateTo("/dashboard");
+      } else data.failed = true;
     }
     return {
       data,

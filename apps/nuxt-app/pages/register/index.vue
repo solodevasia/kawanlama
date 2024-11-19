@@ -78,7 +78,7 @@
           <input
             id="confirmation"
             name="confirmation"
-            type="confirmation"
+            type="password"
             placeholder="Confirmation"
             :value="data.confirmation"
             @change="onChange"
@@ -93,7 +93,9 @@
       >
       <button
         class="outline-none bg-green-500 w-96 p-2 rounded-md text-white"
-        @click="onSubmit"
+        :class="data.disabled ? 'text-disabled bg-disabled cursor-no-drop' : ''"
+        :disabled="data.disbaled"
+        @click="data.disabled ? null : onSubmit()"
       >
         Register
       </button>
@@ -109,9 +111,10 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, watch } from "vue";
 export default defineComponent({
   setup() {
+    const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const data = reactive({
       username: "",
       email: "",
@@ -120,6 +123,7 @@ export default defineComponent({
       passwordDontMatch: false,
       invalidEmail: false,
       success: false,
+      disabled: true,
     });
 
     function onNavigate() {
@@ -131,9 +135,7 @@ export default defineComponent({
       data[input.name] = input.value;
       if (input.name === "email") {
         data.invalidEmail = false;
-        if (
-          !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(input.value)
-        ) {
+        if (!regexEmail.test(input.value)) {
           data.invalidEmail = true;
         }
       }
@@ -143,11 +145,23 @@ export default defineComponent({
           data.passwordDontMatch = true;
         }
       }
+      if (
+        data.username &&
+        data.email &&
+        data.password &&
+        data.confirmation &&
+        regexEmail.test(data.email) &&
+        data.password === data.confirmation
+      ) {
+        data.disabled = false;
+      } else data.disabled = true;
     }
 
     function onSubmit() {
-      console.log(data);
       data.success = true;
+      setTimeout(() => {
+        navigateTo("/");
+      }, 500);
     }
     return {
       data,
